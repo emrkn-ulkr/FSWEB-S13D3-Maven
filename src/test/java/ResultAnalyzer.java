@@ -18,12 +18,8 @@ import java.util.stream.Collectors;
 
 
 public class ResultAnalyzer implements TestWatcher, AfterAllCallback {
-    private List<TestResultStatus> testResultsStatus = new ArrayList<>();
     private static final String taskId = "140";
-
-    private enum TestResultStatus {
-        SUCCESSFUL, ABORTED, FAILED, DISABLED;
-    }
+    private List<TestResultStatus> testResultsStatus = new ArrayList<>();
 
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> reason) {
@@ -55,7 +51,7 @@ public class ResultAnalyzer implements TestWatcher, AfterAllCallback {
         long failure = summary.get(TestResultStatus.FAILED) != null ? summary.get(TestResultStatus.FAILED) : 0;
 
         double score = (double) success / (success + failure);
-        String userId = "999999";
+        String userId = "304683";
 
         JSONObject json = new JSONObject();
         json.put("score", score);
@@ -77,6 +73,10 @@ public class ResultAnalyzer implements TestWatcher, AfterAllCallback {
         } finally {
             httpClient.close();
         }
+    }
+
+    private enum TestResultStatus {
+        SUCCESSFUL, ABORTED, FAILED, DISABLED;
     }
 
 
